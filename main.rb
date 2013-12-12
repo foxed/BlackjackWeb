@@ -61,7 +61,7 @@ helpers do
   def loser!(msg)
     @show_hit_or_stay = false
     session[:player_pot] = session[:player_pot] - session[:player_bet]
-    @error="<strong>#{session[:player_name]} loses and now has $#{session[:player_pot]}.</strong> #{msg}"
+    @error="<strong>#{session[:player_name]} loses $#{session[:player_bet]}.</strong> #{msg}"
     @play_again = true  
   end
 
@@ -146,7 +146,7 @@ post '/game/player/hit' do
     loser!("BUST! #{session[:player_name]}'s cards add up to #{player_total}.")
   end
   
-  erb :game
+  erb :game, layout: false 
 end
 
 post '/game/player/stay' do
@@ -189,7 +189,7 @@ get '/game/compare' do
   if player_total > dealer_total 
     winner!("#{session[:player_name]} stayed at #{player_total}, and the dealer stayed at #{dealer_total}.")
   elsif dealer_total > player_total 
-    loser!("#{session[:player_name]} stayed at #{player_total}, and the dealer stayed at #{dealer_total}.")
+    loser!("The dealer stayed at #{dealer_total}, and #{session[:player_name]} stayed at #{player_total}.")
   else
     tie!("Both #{session[:player_name]} and the dealer stayed at #{player_total}.")
   end

@@ -1,5 +1,6 @@
 
-<h2>BLACKJACK</h2>
+<div id="game">
+  <h2>BLACKJACK</h2>
 <p>
 <h5>Welcome, <%= session[:player_name]%>.</h5>
 <h4><%= session[:player_name]%> has <%= session[:player_pot]%>.</h4>
@@ -55,3 +56,4 @@
    <input type="submit" class="btn btn-warning" value="Stay" />
   </form>
 <% end %>
+</div>
